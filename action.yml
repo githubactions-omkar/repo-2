@@ -8,11 +8,11 @@ on:
         description: "The JFrog URL"
         required: true
 
-    outputs:
-      JFROG_USERNAME:
-        description: "JFrog Username"
-      JFROG_PASSWORD:
-        description: "JFrog Password"
+outputs:
+  JFROG_USERNAME:
+    description: "JFrog Username"
+  JFROG_PASSWORD:
+    description: "JFrog Password"
 
 jobs:
   set-jfrog-credentials:
