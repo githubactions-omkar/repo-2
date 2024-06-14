@@ -15,20 +15,31 @@ on:
         description: "JFrog Password"
 
 jobs:
-  job1:
-  runs-on: ubuntu-latest
-  steps:
-    - name: "Set JFrog Credentials"
-      shell: bash
-      run: |
-        if [[ "${{ inputs.JFROG_URL }}" == "AURBA_URL" ]]; then
-          echo "JFROG_USERNAME=${{ secrets.ARUBA_JFROG_USERNAME }}" >> $GITHUB_OUTPUT
-          echo "JFROG_PASSWORD=${{ secrets.ARUBA_JFROG_PASSWORD }}" >> $GITHUB_OUTPUT
-        elif [[ "${{ inputs.JFROG_URL }}" == "CSS_URL" ]]; then
-          echo "JFROG_USERNAME=${{ secrets.CSS_JFROG_USERNAME }}" >> $GITHUB_OUTPUT
-          echo "JFROG_PASSWORD=${{ secrets.CSS_JFROG_PASSWORD }}" >> $GITHUB_OUTPUT
-        else
-          echo "JFROG_USERNAME=${{ secrets.DEFAULT_JFROG_USERNAME }}" >> $GITHUB_OUTPUT
-          echo "JFROG_PASSWORD=${{ secrets.DEFAULT_JFROG_PASSWORD }}" >> $GITHUB_OUTPUT
-        fi
+  set-jfrog-credentials:
+    runs-on: ubuntu-latest
+    outputs:
+      JFROG_USERNAME: ${{ steps.set-outputs.outputs.JFROG_USERNAME }}
+      JFROG_PASSWORD: ${{ steps.set-outputs.outputs.JFROG_PASSWORD }}
+    steps:
+      - name: "Set JFrog Credentials"
+        id: set-creds
+        shell: bash
+        run: |
+          if [[ "${{ inputs.JFROG_URL }}" == "AURBA_URL" ]]; then
+            echo "JFROG_USERNAME=${{ secrets.ARUBA_JFROG_USERNAME }}" >> $GITHUB_ENV
+            echo "JFROG_PASSWORD=${{ secrets.ARUBA_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ inputs.JFROG_URL }}" == "CSS_URL" ]]; then
+            echo "JFROG_USERNAME=${{ secrets.CSS_JFROG_USERNAME }}" >> $GITHUB_ENV
+            echo "JFROG_PASSWORD=${{ secrets.CSS_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          else
+            echo "JFROG_USERNAME=${{ secrets.DEFAULT_JFROG_USERNAME }}" >> $GITHUB_ENV
+            echo "JFROG_PASSWORD=${{ secrets.DEFAULT_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          fi
+
+      - name: "Set Outputs"
+        id: set-outputs
+        shell: bash
+        run: |
+          echo "JFROG_USERNAME=$JFROG_USERNAME" >> $GITHUB_OUTPUT
+          echo "JFROG_PASSWORD=$JFROG_PASSWORD" >> $GITHUB_OUTPUT
 
