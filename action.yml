@@ -37,14 +37,14 @@ runs:
       shell: bash
       run: |
         if [[ "${{ inputs.JFROG_URL }}" == "AURBA_URL" ]]; then
-          echo "JFROG_USERNAME=${{ inputs.ARUBA_JFROG_USERNAME }}" >> $GITHUB_ENV
-          echo "JFROG_PASSWORD=${{ inputs.ARUBA_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          echo "JFROG_USERNAME=${{ secrets.ARUBA_JFROG_USERNAME }}" >> $GITHUB_ENV
+          echo "JFROG_PASSWORD=${{ secrets.ARUBA_JFROG_PASSWORD }}" >> $GITHUB_ENV
         elif [[ "${{ inputs.JFROG_URL }}" == "CSS_URL" ]]; then
-          echo "JFROG_USERNAME=${{ inputs.CSS_JFROG_USERNAME }}" >> $GITHUB_ENV
-          echo "JFROG_PASSWORD=${{ inputs.CSS_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          echo "JFROG_USERNAME=${{ secrets.CSS_JFROG_USERNAME }}" >> $GITHUB_ENV
+          echo "JFROG_PASSWORD=${{ secrets.CSS_JFROG_PASSWORD }}" >> $GITHUB_ENV
         else
-          echo "JFROG_USERNAME=${{ inputs.DEFAULT_JFROG_USERNAME }}" >> $GITHUB_ENV
-          echo "JFROG_PASSWORD=${{ inputs.DEFAULT_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          echo "JFROG_USERNAME=${{ secrets.DEFAULT_JFROG_USERNAME }}" >> $GITHUB_ENV
+          echo "JFROG_PASSWORD=${{ secrets.DEFAULT_JFROG_PASSWORD }}" >> $GITHUB_ENV
         fi
 
     - name: "Set Outputs"
