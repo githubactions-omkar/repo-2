@@ -7,12 +7,27 @@ on:
       JFROG_URL:
         description: "The JFrog URL"
         required: true
+        type: string
+    secrets:
+      ARUBA_JFROG_USERNAME:
+        description: "ARUBA JFrog Username"
+        required: true
+      ARUBA_JFROG_PASSWORD:
+        description: "ARUBA JFrog Password"
+        required: true
+      CSS_JFROG_USERNAME:
+        description: "CSS JFrog Username"
+        required: true
+      CSS_JFROG_PASSWORD:
+        description: "CSS JFrog Password"
+        required: true
+      DEFAULT_JFROG_USERNAME:
+        description: "Default JFrog Username"
+        required: true
+      DEFAULT_JFROG_PASSWORD:
+        description: "Default JFrog Password"
+        required: true
 
-outputs:
-  JFROG_USERNAME:
-    description: "JFrog Username"
-  JFROG_PASSWORD:
-    description: "JFrog Password"
 
 jobs:
   set-jfrog-credentials:
@@ -42,4 +57,3 @@ jobs:
         run: |
           echo "JFROG_USERNAME=$JFROG_USERNAME" >> $GITHUB_OUTPUT
           echo "JFROG_PASSWORD=$JFROG_PASSWORD" >> $GITHUB_OUTPUT
-
