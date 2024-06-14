@@ -1,16 +1,18 @@
 name: "JFrog Credentials"
 description: "Set JFrog credentials based on the JFrog URL"
 
-inputs:
-  JFROG_URL:
-    description: "The JFrog URL"
-    required: true
+on:
+  workflow_call:
+    inputs:
+      JFROG_URL:
+        description: "The JFrog URL"
+        required: true
 
-outputs:
-  JFROG_USERNAME:
-    description: "JFrog Username"
-  JFROG_PASSWORD:
-    description: "JFrog Password"
+    outputs:
+      JFROG_USERNAME:
+        description: "JFrog Username"
+      JFROG_PASSWORD:
+        description: "JFrog Password"
 
 jobs:
   job1:
