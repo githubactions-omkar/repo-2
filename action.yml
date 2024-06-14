@@ -45,11 +45,11 @@ jobs:
       - name: Set Outputs
           id: set-output
           run: |
-            echo "JFROG_USERNAME=${JFROG_USERNAME}" >> $GITHUB_OUTPUT
-            echo "JFROG_PASSWORD=${JFROG_PASSWORD}" >> $GITHUB_OUTPUT
-          env:
-            JFROG_USERNAME: ${{ env.JFROG_USERNAME }}
-            JFROG_PASSWORD: ${{ env.JFROG_PASSWORD }}
+            echo "JFROG_USERNAME=$JFROG_USERNAME" >> $GITHUB_OUTPUT
+            echo "JFROG_PASSWORD=$JFROG_PASSWORD" >> $GITHUB_OUTPUT
+          # env:
+          #   JFROG_USERNAME: ${{ env.JFROG_USERNAME }}
+          #   JFROG_PASSWORD: ${{ env.JFROG_PASSWORD }}
     # - name: "Set Outputs"
     #   shell: bash
     #   run: |
