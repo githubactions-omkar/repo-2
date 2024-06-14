@@ -12,21 +12,21 @@ outputs:
   JFROG_PASSWORD:
     description: "JFrog Password"
 
-runs:
-  using: "composite"
+jobs:
+  job1:
+  runs-on: ubuntu-latest
   steps:
     - name: "Set JFrog Credentials"
       shell: bash
       run: |
         if [[ "${{ inputs.JFROG_URL }}" == "AURBA_URL" ]]; then
-          echo "JFROG_USERNAME=${{ secrets.ARUBA_JFROG_USERNAME }}" >> $GITHUB_ENV
-          echo "JFROG_PASSWORD=${{ secrets.ARUBA_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          echo "JFROG_USERNAME=${{ secrets.ARUBA_JFROG_USERNAME }}" >> $GITHUB_OUTPUT
+          echo "JFROG_PASSWORD=${{ secrets.ARUBA_JFROG_PASSWORD }}" >> $GITHUB_OUTPUT
         elif [[ "${{ inputs.JFROG_URL }}" == "CSS_URL" ]]; then
-          echo "JFROG_USERNAME=${{ secrets.CSS_JFROG_USERNAME }}" >> $GITHUB_ENV
-          echo "JFROG_PASSWORD=${{ secrets.CSS_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          echo "JFROG_USERNAME=${{ secrets.CSS_JFROG_USERNAME }}" >> $GITHUB_OUTPUT
+          echo "JFROG_PASSWORD=${{ secrets.CSS_JFROG_PASSWORD }}" >> $GITHUB_OUTPUT
         else
-          echo "JFROG_USERNAME=${{ secrets.DEFAULT_JFROG_USERNAME }}" >> $GITHUB_ENV
-          echo "JFROG_PASSWORD=${{ secrets.DEFAULT_JFROG_PASSWORD }}" >> $GITHUB_ENV
+          echo "JFROG_USERNAME=${{ secrets.DEFAULT_JFROG_USERNAME }}" >> $GITHUB_OUTPUT
+          echo "JFROG_PASSWORD=${{ secrets.DEFAULT_JFROG_PASSWORD }}" >> $GITHUB_OUTPUT
         fi
-      env:
-        GITHUB_ENV: $GITHUB_ENV
+
